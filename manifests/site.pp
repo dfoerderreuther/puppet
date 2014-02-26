@@ -11,4 +11,6 @@ node 'puppetagent' {
         include toolbox
 	include mysite
 }
-
+node 'cookbook' {
+	include mysite
+}
