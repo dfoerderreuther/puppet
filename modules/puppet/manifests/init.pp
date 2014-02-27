@@ -9,7 +9,13 @@ class puppet {
 		mode => '0755', 
 	}
 	
+	file { '/var/log/puppet-pull-updates.log': 
+		ensure => 'present', 
+		mode => '0666', 
+	}
+	
 	cron { 'run-puppet': 
+		ensure => 'present', 
 		user => 'vagrant', 
 		command => '/usr/local/bin/pull-updates >> /var/log/puppet-pull-updates.log ', 
 		minute => '*/1', 
