@@ -1,6 +1,6 @@
 import 'classes/*.pp'
 /*
-TODO: MOVE
+TODO: Move
 */
 class toolbox {
         file {'/usr/local/sbin/puppetsimple.sh':
