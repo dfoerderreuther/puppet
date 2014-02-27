@@ -4,3 +4,4 @@ sudo puppet apply /puppet/manifests/site.pp \
 	--verbose \
 	 $*
 
+
