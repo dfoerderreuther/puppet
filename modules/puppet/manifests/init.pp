@@ -18,7 +18,7 @@ class puppet {
 		ensure => 'present', 
 		user => 'vagrant', 
 		command => '/usr/local/bin/pull-updates >> /var/log/puppet-pull-updates.log ', 
-		minute => '*/1', 
+		minute => '*/10', 
 		hour => '*', 
 	}
 }
