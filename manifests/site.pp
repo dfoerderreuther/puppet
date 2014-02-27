@@ -10,20 +10,6 @@ class toolbox {
 }
 
 
-define appendLine($file, $line) {
-	exec { "/bin/echo '${line}' >> '${file}'":
-		unless => "/bin/grep -Fx '${line}' '${file}'",
-	}
-}	
-
-class java7withhome {
-	include java7
-	appendLine {
-		'java-home':
-		file => '/etc/environment',  
-		line => 'export JAVA_HOME=/usr/lib/jvm/java-7-oracle', 	
-	}
-}
  
 node 'puppetagent' {
         include toolbox
@@ -31,6 +17,6 @@ node 'puppetagent' {
 }
 node 'cookbook' {
 	include puppet
-	include java7withhome
+	include java7, java7home
 	include mysite
 }
