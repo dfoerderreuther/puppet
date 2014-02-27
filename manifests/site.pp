@@ -14,6 +14,6 @@ node 'puppetagent' {
 	include mysite
 }
 node 'cookbook' {
-	include puppet
+	include puppet::cron
 	include mysite
 }
