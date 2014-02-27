@@ -11,8 +11,8 @@ class puppet {
 }
 
 class puppet::cron {
-	inclode puppet
-	
+
+	include puppet
 	
 	file { '/var/log/puppet-pull-updates.log': 
 		ensure => 'present', 
