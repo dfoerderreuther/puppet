@@ -3,6 +3,10 @@ class puppet {
 		source => 'puppet:///modules/puppet/papply.sh', 
 		mode => '0755', 
 	}
+}
+
+class puppet::cron {
+	inclode puppet
 	
 	file { '/usr/local/bin/pull-updates': 
 		source => 'puppet:///modules/puppet/pull-updates.sh', 
