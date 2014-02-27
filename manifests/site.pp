@@ -1,5 +1,7 @@
 import 'classes/*.pp'
-
+/*
+TODO: Move
+*/
 class toolbox {
         file {'/usr/local/sbin/puppetsimple.sh':
 	        owner => root, group => root, mode => 0755, 
