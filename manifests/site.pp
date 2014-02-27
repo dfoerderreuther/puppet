@@ -15,5 +15,6 @@ node 'puppetagent' {
 }
 node 'cookbook' {
 	include puppet
+	include java7
 	include mysite
 }
