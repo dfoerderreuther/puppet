@@ -1,4 +1,3 @@
-import 'classes/*.pp'
 /*
 TODO: Move
 */
@@ -13,10 +12,9 @@ class toolbox {
  
 node 'puppetagent' {
         include toolbox
-	include mysite
 }
 node 'cookbook' {
 	include puppet
 	include java7, java7home
-	include mysite
+	include tomcat
 }

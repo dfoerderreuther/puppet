@@ -13,7 +13,12 @@ class java7home {
 	appendLine {
 		'java-home':
 		file => '/etc/environment',  
-		line => 'export JAVA_HOME=/usr/lib/jvm/java-7-oracle', 	
+		line => 'JAVA_HOME=/usr/lib/jvm/java-7-oracle', 	
 	}
 
+	appendLine {
+		'bash.bashrc': 
+		file => '/etc/bash.bashrc', 
+		line => 'JAVA_HOME=/usr/lib/jvm/java-7-oracle', 
+	}
 }
