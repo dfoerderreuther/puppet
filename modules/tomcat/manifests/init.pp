@@ -25,22 +25,26 @@ class tomcat {
                 owner => root, group => root, mode => 0644,
                 source =>
                         "puppet:///modules/tomcat/tomcat.apache.conf",
+		require => Package['apache2-mpm-prefork'],
         }
 
 	/*file { '/etc/apache2/workers.properties': 
 		owner => root, group => root, mode => 0644, 
 		source => "puppet:///modules/tomcat/workers.properties", 
+		require => Package['apache2-mpm-prefork'],
 	}
 
         file { '/etc/apache2/conf.d/mod_jk.conf':
                 owner => root, group => root, mode => 0644,
                 source => "puppet:///modules/tomcat/mod_jk.conf",
+		require => Package['apache2-mpm-prefork'],
         }*/
 
         file { '/etc/tomcat7/server.xml':
                 owner => root, group => root, mode => 0644,
 		notify => Service['tomcat7'],
                 source => "puppet:///modules/tomcat/server.xml",
+		require => Package['tomcat7'],
         }
 
 	service {
