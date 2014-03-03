@@ -28,6 +28,11 @@ class tomcat {
 		require => Package['apache2-mpm-prefork'],
         }
 
+        file { '/etc/apache2/sites-enabled/000-default':
+               	ensure => absent,  
+		require => Package['apache2-mpm-prefork'],
+        }
+
 	/*file { '/etc/apache2/workers.properties': 
 		owner => root, group => root, mode => 0644, 
 		source => "puppet:///modules/tomcat/workers.properties", 
