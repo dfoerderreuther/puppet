@@ -1,0 +1,37 @@
+<VirtualHost *:80>
+
+    ServerName <%= @servername %>
+    ServerAlias <%= @serveralias %>
+
+    JkMount  /* ajp13_worker
+    ErrorLog /var/log/apache2/<%= @servername %>-error.log
+
+    LogLevel warn
+    CustomLog /var/log/apache2/<%= @servername %>-access.log combined
+
+    #RewriteEngine on
+    #RewriteRule ^/redirectlink(.*)  http://<%= @servername %>/moveto$1 [R,L]
+
+
+    <% @staticresources.each do |resource| -%>
+
+        JkUnMount /<%= resource %>/* ajp13_worker
+        Alias /<%= resource %> /opt/static/<%= resource %>/htdocs/
+        <Location /<%= resource %>>
+            Options -Indexes
+        </Location>
+
+    <% end -%>
+
+    #JkUnMount /error/* ajp13_worker
+    #Alias /error /opt/<%= @servername %>/static/error/
+    #<Location /error>
+    #    Options -Indexes
+    #</Location>
+    #ErrorDocument 400 /error/error.html
+    #ErrorDocument 404 /error/404.html
+    #ErrorDocument 405 /error/error.html
+    #ErrorDocument 500 /error/error.html
+    #ErrorDocument 503 /error/503.html
+
+</VirtualHost>
