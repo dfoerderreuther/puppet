@@ -22,14 +22,40 @@ class tomcat {
 			unless => "/bin/grep -Fx '${line}' '${file}'",
 		}
 	}
-
 	
 	package { $packages: 
 		ensure => installed
 	}
 
+	file { "/opt/static":
+		owner => root, 
+		group => root, 
+		mode => 0755,
+		ensure => directory,
+	}
+
+	define createStaticDirectory {
+		$directory = $name
+		file { "/opt/static/$directory":
+                        owner => root, 
+			group => root, 
+			mode => 0755,
+                        ensure => directory,
+                }
+		file { "/opt/static/$directory/htdocs":
+                        owner => root, 
+			group => root, 
+			mode => 0755,
+                        ensure => directory,
+                }
+	}
+
+	createStaticDirectory { $staticresources: ; } 
+
         file { '/etc/apache2/sites-enabled/tomcat':
-                owner => root, group => root, mode => 0644,
+                owner => root, 
+		group => root, 
+		mode => 0644,
                 content => template("tomcat/tomcat.apache.conf.erb"),
 		require => Package['apache2-mpm-prefork'],
 		notify  => Service["apache2"],
@@ -41,7 +67,9 @@ class tomcat {
         }
 
         file { '/etc/tomcat7/server.xml':
-                owner => root, group => root, mode => 0644,
+                owner => root, 
+		group => root, 
+		mode => 0644,
 		notify => Service['tomcat7'],
                 source => "puppet:///modules/tomcat/server.xml",
 		require => Package['tomcat7'],

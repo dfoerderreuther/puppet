@@ -13,15 +13,15 @@
     #RewriteRule ^/redirectlink(.*)  http://<%= @servername %>/moveto$1 [R,L]
 
 
-    <% @staticresources.each do |resource| -%>
+  <% @staticresources.each do |resource| -%>
 
-        JkUnMount /<%= resource %>/* ajp13_worker
-        Alias /<%= resource %> /opt/static/<%= resource %>/htdocs/
-        <Location /<%= resource %>>
-            Options -Indexes
-        </Location>
+    JkUnMount /<%= resource %>/* ajp13_worker
+    Alias /<%= resource %> /opt/static/<%= resource %>/htdocs/
+    <Location /<%= resource %>>
+        Options -Indexes
+    </Location>
 
-    <% end -%>
+  <% end -%>
 
     #JkUnMount /error/* ajp13_worker
     #Alias /error /opt/<%= @servername %>/static/error/
