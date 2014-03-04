@@ -17,6 +17,24 @@ class tomcat {
 		'libapache2-mod-jk'
 		]
 
+	group { 'app': 
+		ensure => present, 
+	}
+
+	user { 'app':
+		ensure     => present,
+		gid        => 'app',
+		shell      => '/bin/false',
+		home       => '/home/app',
+		managehome => true,
+		require => Group['app'], 
+	}
+
+	user { 'tomcat7': 
+		ensure => present, 
+		groups => 'app', 
+	}
+
 	define appendLine($file, $line) {
 		exec { "/bin/echo '${line}' >> '${file}'":
 			unless => "/bin/grep -Fx '${line}' '${file}'",
@@ -43,9 +61,9 @@ class tomcat {
                         ensure => directory,
                 }
 		file { "/opt/static/$directory/htdocs":
-                        owner => root, 
-			group => root, 
-			mode => 0755,
+                        owner => app, 
+			group => app, 
+			mode => 0775,
                         ensure => directory,
                 }
 	}
