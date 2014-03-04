@@ -3,7 +3,14 @@
 # Sample Usage:
 #  include tomcat
 class tomcat {
-
+	
+	$servername = 'localhost'
+	$serveralias = 'www.localhost www2.localhost'
+	$staticresources = [
+		'images', 
+		'uploads'
+		]
+	
 	$packages = [
 		'apache2-mpm-prefork', 
 		'tomcat7', 
@@ -23,8 +30,7 @@ class tomcat {
 
         file { '/etc/apache2/sites-enabled/tomcat':
                 owner => root, group => root, mode => 0644,
-                source =>
-                        "puppet:///modules/tomcat/tomcat.apache.conf",
+                content => template("tomcat/tomcat.apache.conf.erb"),
 		require => Package['apache2-mpm-prefork'],
 		notify  => Service["apache2"],
         }
@@ -33,18 +39,6 @@ class tomcat {
                	ensure => absent,  
 		require => Package['apache2-mpm-prefork'],
         }
-
-	/*file { '/etc/apache2/workers.properties': 
-		owner => root, group => root, mode => 0644, 
-		source => "puppet:///modules/tomcat/workers.properties", 
-		require => Package['apache2-mpm-prefork'],
-	}
-
-        file { '/etc/apache2/conf.d/mod_jk.conf':
-                owner => root, group => root, mode => 0644,
-                source => "puppet:///modules/tomcat/mod_jk.conf",
-		require => Package['apache2-mpm-prefork'],
-        }*/
 
         file { '/etc/tomcat7/server.xml':
                 owner => root, group => root, mode => 0644,
