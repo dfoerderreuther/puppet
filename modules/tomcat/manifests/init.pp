@@ -26,6 +26,7 @@ class tomcat {
                 source =>
                         "puppet:///modules/tomcat/tomcat.apache.conf",
 		require => Package['apache2-mpm-prefork'],
+		notify  => Service["apache2"],
         }
 
         file { '/etc/apache2/sites-enabled/000-default':
