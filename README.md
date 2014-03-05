@@ -9,7 +9,7 @@ Puppet
 	cd /etc
 	sudo mv puppet puppet.origin
 	sudo ln -s /puppet /etc/puppet
-	puppet apply /puppet/manifests/site.pp \
+	sudo puppet apply /puppet/manifests/site.pp \
 		--modulepath=/puppet/modules/ \
 		--verbose
 
