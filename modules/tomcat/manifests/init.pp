@@ -46,30 +46,11 @@ class tomcat {
 		ensure => installed
 	}
 
-	file { "/opt/static":
-		owner => root, 
-		group => root, 
-		mode => 0755,
-		ensure => directory,
+
+	class { staticdirs:
+		staticresources => $staticresources
 	}
 
-	define createStaticDirectory {
-		$directory = $name
-		file { "/opt/static/$directory":
-                        owner => root, 
-			group => root, 
-			mode => 0755,
-                        ensure => directory,
-                }
-		file { "/opt/static/$directory/htdocs":
-                        owner => app, 
-			group => app, 
-			mode => 0775,
-                        ensure => directory,
-                }
-	}
-
-	createStaticDirectory { $staticresources: ; } 
 
         file { '/etc/apache2/sites-enabled/tomcat':
                 owner => root, 
