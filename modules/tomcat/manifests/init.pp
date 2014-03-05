@@ -48,7 +48,8 @@ class tomcat {
 
 
 	class { staticdirs:
-		staticresources => $staticresources
+		staticresources => $staticresources, 
+		require => User['app'],
 	}
 
 

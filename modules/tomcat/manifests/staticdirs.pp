@@ -8,7 +8,8 @@
 #      'uploads'
 # ]
 # class { staticdirs:
-#      staticresources => $staticresources
+#      staticresources => $staticresources, 
+#      require => User['app'], 
 # }
 # 
 class staticdirs($staticresources) {
