@@ -21,7 +21,10 @@ class tomcat7 {
                 'tomcat7':
                 ensure => running,
                 enable => true,
-                require => Package['tomcat7'],
+                require => [ 
+			Package['tomcat7'],
+			Package['oracle-java7-installer'], 
+			], 
         }
 
 }
