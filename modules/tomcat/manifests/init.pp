@@ -10,6 +10,7 @@ class tomcat {
 		'images', 
 		'uploads'
 		]
+
 	
 	$packages = [
 		'apache2-mpm-prefork', 
