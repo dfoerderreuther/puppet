@@ -4,11 +4,12 @@ puppet
 Puppet
 
 
-	cd /etc
-	mv puppet puppet.origin
 	git clone git@github.com:dfoerderreuther/puppet.git
-	ln -s /etc/puppet /puppet
-	sudo puppet apply /puppet/manifests/site.pp \
+	sudo mv puppet /puppet
+	cd /etc
+	sudo mv puppet puppet.origin
+	sudo ln -s /puppet /etc/puppet
+	puppet apply /puppet/manifests/site.pp \
 		--modulepath=/puppet/modules/ \
 		--verbose
 
