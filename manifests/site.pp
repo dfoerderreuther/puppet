@@ -1,5 +1,5 @@
 node 'myhost' {
 	include puppet
-	include java7
+	include java
 	include tomcat
 }

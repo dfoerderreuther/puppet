@@ -63,7 +63,7 @@ class tomcat {
         appendLine {
                'javahome':
                file => '/etc/default/tomcat7',
-               line => 'JAVA_HOME=/usr/lib/jvm/java-7-oracle',
+               line => 'JAVA_HOME=/opt/jdk',
         }
 
 

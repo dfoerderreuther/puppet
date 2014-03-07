@@ -23,7 +23,7 @@ class tomcat7 {
                 enable => true,
                 require => [ 
 			Package['tomcat7'],
-			Package['oracle-java7-installer'], 
+			Exec['install_java'], 
 			], 
         }
 

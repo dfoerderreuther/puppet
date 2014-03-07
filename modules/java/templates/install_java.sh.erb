@@ -1,0 +1,44 @@
+#!/bin/sh
+#URL="http://download.oracle.com/otn-pub/java/jdk/7u51-b13/jdk-7u51-linux-x64.tar.gz"
+#TARBALL="jdk-7u51-linux-x64.tar.gz"
+#FOLDER="jdk1.7.0_51"
+
+URL="<%= @url %>"
+TARBALL="<%= @tarball %>"
+FOLDER="<%= @folder %>"
+VFILE="/opt/java.version"
+
+if grep -q $FOLDER "${VFILE}"; then
+    echo "${FOLDER} already installed"
+    exit 0
+fi
+
+cd /tmp
+
+# get oracle java
+# TODO switch to wget after development
+#wget --no-cookies --header "Cookie: gpw_e24=xxx;" ${URL}
+cp /vagrant/${TARBALL} .
+
+# unpack and move to /opt
+tar -xzf ${TARBALL}
+rm -Rf /opt/${FOLDER}
+mv ${FOLDER} /opt
+
+# create symlink /opt/jdk
+rm -f /opt/jdk
+ln -s /opt/${FOLDER} /opt/jdk
+
+# set alternative symlinks
+ 
+find /opt/jdk/bin/ -executable -type f | while read file; do
+   filename=`basename $file`
+   alternative="/etc/alternatives/${filename}"
+   bin="/usr/bin/${filename}"
+   rm -f $alternative $bin
+   ln -s $file $alternative
+   ln -s $alternative $bin 
+done
+
+echo $FOLDER > $VFILE
+
